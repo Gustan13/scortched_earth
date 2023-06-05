@@ -17,14 +17,19 @@ class Game:
 
         self.game_loop()
 
-    def draw(self):
-        self.display.fill((0, 180, 255))
+    def update(self):
+        self.obstacle_group.update()
+        self.player_group.update()
 
+    def draw(self):
         self.obstacle_group.draw(self.display)
+        self.player_group.draw(self.display)
 
     def flip(self):
-        pygame.display.flip()
+        pygame.display.update()
+        # self.update()
         self.clock.tick(FPS)
+        self.display.fill((0, 180, 255))
 
     def game_loop(self):
         map_m = map_maker(self.obstacle_group, self.player_group)
@@ -36,6 +41,7 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.isRunning = False
 
+            self.update()
             self.draw()
             self.flip()
 

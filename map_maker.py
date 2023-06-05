@@ -1,4 +1,5 @@
 from tile import tile
+from player import player
 from settings import TILE_SIZE, HALF_TILE, WIDTH, HEIGHT
 
 
@@ -15,6 +16,6 @@ class map_maker:
                 elif num == 2:
                     self.obstacle_group.add(tile(j, i, "floor"))
                 elif num == 3:
-                    self.obstacle_group.add(tile(j, i, "marcelo"))
+                    self.player_group.add(player("marcelo", j, i, self.obstacle_group))
                 elif num == 4:
-                    self.obstacle_group.add(tile(j, i, "binder"))
+                    self.player_group.add(player("binder", j, i, self.obstacle_group))
