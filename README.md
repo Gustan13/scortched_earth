@@ -28,3 +28,5 @@ The game ends once all three of the player's lives is taken.
 - [x] Gravity
 - [x] Banana throw system
 - [x] Banana break world system
+
+- [ ] Hud

@@ -2,6 +2,7 @@ import pygame
 from settings import FPS, WIDTH, HEIGHT
 from map_maker import map_maker
 from maps import map_1
+from hud import Hud
 
 
 class Game:
@@ -36,6 +37,7 @@ class Game:
 
     def game_loop(self):
         map_m = map_maker(self.obstacle_group, self.player_group, self.banana_group)
+        hud = Hud(self.player_group)
 
         map_m.build_map(map_1)
 
@@ -45,6 +47,7 @@ class Game:
                     self.isRunning = False
 
             self.update()
+            hud.update()
             self.draw()
             self.flip()
 

@@ -2,7 +2,7 @@ import pygame
 from animation import Animation
 from banana import Banana
 
-from math import pi
+from math import pi, sin, cos
 
 from settings import TILE_SIZE, ACCELERATION, FPS
 
@@ -33,6 +33,9 @@ class player(pygame.sprite.Sprite):
 
         self.timer = 0
         self.timer_set = 20
+
+        self.cos = 0
+        self.sin = 0
 
     def input(self):
         pass
@@ -67,7 +70,7 @@ class player(pygame.sprite.Sprite):
         if self.angle < 0:
             self.angle = pi * 2
 
-        self.angle -= dir * 0.01
+        self.angle -= dir * 0.05
         # print(self.angle)
 
     def throw_banana(self):
@@ -87,3 +90,6 @@ class player(pygame.sprite.Sprite):
         self.idle_anim.play(self)
         self.input()
         self.fall()
+
+        self.cos = cos(self.angle)
+        self.sin = -sin(self.angle)
