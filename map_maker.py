@@ -1,12 +1,14 @@
 from tile import tile
-from player import player
+from binder import Binder
+from marcelo import Marcelo
 from settings import TILE_SIZE, HALF_TILE, WIDTH, HEIGHT
 
 
 class map_maker:
-    def __init__(self, obstacle_group, player_group) -> None:
+    def __init__(self, obstacle_group, player_group, banana_group) -> None:
         self.obstacle_group = obstacle_group
         self.player_group = player_group
+        self.banana_group = banana_group
 
     def build_map(self, map_array):
         for i, row in enumerate(map_array):
@@ -16,6 +18,10 @@ class map_maker:
                 elif num == 2:
                     self.obstacle_group.add(tile(j, i, "floor"))
                 elif num == 3:
-                    self.player_group.add(player("marcelo", j, i, self.obstacle_group))
+                    self.player_group.add(
+                        Marcelo(j, i, self.obstacle_group, self.banana_group)
+                    )
                 elif num == 4:
-                    self.player_group.add(player("binder", j, i, self.obstacle_group))
+                    self.player_group.add(
+                        Binder(j, i, self.obstacle_group, self.banana_group)
+                    )

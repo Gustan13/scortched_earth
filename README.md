@@ -22,3 +22,9 @@ The game ends once all three of the player's lives is taken.
     - [x] Binder
     - [x] Building
     - [x] Banana
+
+- [x] Player movement
+- [x] Rotation system
+- [x] Gravity
+- [x] Banana throw system
+- [x] Banana break world system
