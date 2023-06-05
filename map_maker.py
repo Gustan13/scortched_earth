@@ -9,5 +9,12 @@ class map_maker:
 
     def build_map(self, map_array):
         for i, row in enumerate(map_array):
-            for j, column in enumerate(row):
-                self.obstacle_group.add(tile(j, i))
+            for j, num in enumerate(row):
+                if num == 1:
+                    self.obstacle_group.add(tile(j, i, "building"))
+                elif num == 2:
+                    self.obstacle_group.add(tile(j, i, "floor"))
+                elif num == 3:
+                    self.obstacle_group.add(tile(j, i, "marcelo"))
+                elif num == 4:
+                    self.obstacle_group.add(tile(j, i, "binder"))
