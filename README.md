@@ -17,7 +17,7 @@ The game ends once all three of the player's lives is taken.
 
 ## TODO
 
-- [ ] Game Sprites
+- [x] Game Sprites
     - [x] Marcelo
     - [x] Binder
     - [x] Building
