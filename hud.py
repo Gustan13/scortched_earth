@@ -1,5 +1,5 @@
 import pygame
-from settings import WIDTH, TILE_SIZE
+from settings import WIDTH, TILE_SIZE, HALF_TILE
 
 
 class Hud:
@@ -13,10 +13,10 @@ class Hud:
             pygame.draw.line(
                 self.display,
                 (0, 0, 0),
-                (TILE_SIZE + (WIDTH - 120) * i, TILE_SIZE * 2),
+                (player.rect.x + HALF_TILE, player.rect.y + HALF_TILE),
                 (
-                    TILE_SIZE + (WIDTH - 120) * i + player.cos * 30,
-                    TILE_SIZE * 2 + player.sin * 30,
+                    player.rect.x + HALF_TILE + player.cos * 50,
+                    player.rect.y + HALF_TILE + player.sin * 50,
                 ),
                 2,
             )

@@ -32,3 +32,10 @@ The game ends once all three of the player's lives is taken.
 - [ ] Hud
 
 - [ ] Defeat System
+
+- [ ] Powerups
+    - [ ] High jump
+    - [ ] Speed boost
+    - [ ] Explosive banana
+    - [ ] Block placement
+    - [ ] +1 banana

@@ -32,10 +32,12 @@ class player(pygame.sprite.Sprite):
         self.mirrored = True
 
         self.angle = pi / 2
-        self.power = 5
+        self.power = 50
 
         self.timer = 0
         self.timer_set = 20
+        self.banana_amount = 5
+        self.reload_timer = 60
 
         self.cos = 0
         self.sin = 0
@@ -88,6 +90,9 @@ class player(pygame.sprite.Sprite):
                 self.y_speed = 0
                 self.is_grounded = True
 
+        if self.rect.y > HEIGHT:
+            self.kill()
+
     def change_angle(self, dir):
         if self.angle > pi * 2:
             self.angle = 0
@@ -101,8 +106,8 @@ class player(pygame.sprite.Sprite):
     def change_power(self, mag):
         self.power += mag
 
-        if self.power > 150:
-            self.power = 150
+        if self.power > 100:
+            self.power = 100
         elif self.power < 1:
             self.power = 1
 
@@ -111,6 +116,9 @@ class player(pygame.sprite.Sprite):
             self.y_speed = -6
 
     def throw_banana(self):
+        if self.banana_amount < 1:
+            return
+
         if self.timer <= 0:
             Banana(
                 self.banana_group,
@@ -122,6 +130,7 @@ class player(pygame.sprite.Sprite):
                 self.rect.topleft,
             )
             self.timer = self.timer_set
+            self.banana_amount -= 1
         else:
             self.timer -= 1
 
@@ -135,3 +144,10 @@ class player(pygame.sprite.Sprite):
 
         self.cos = cos(self.angle)
         self.sin = -sin(self.angle)
+
+        if self.banana_amount < 1:
+            self.reload_timer -= 1
+
+        if self.reload_timer < 1:
+            self.reload_timer = 60
+            self.banana_amount = 5
