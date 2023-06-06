@@ -1,10 +1,11 @@
 import pygame
 from animation import Animation
 from banana import Banana
+from tile import tile
 
 from math import pi, sin, cos
 
-from settings import TILE_SIZE, WIDTH, HEIGHT, FPS
+from settings import TILE_SIZE, HALF_TILE, WIDTH, HEIGHT, FPS
 
 
 class player(pygame.sprite.Sprite):
@@ -49,6 +50,11 @@ class player(pygame.sprite.Sprite):
 
     def walk(self, dir):
         self.rect.centerx += dir * TILE_SIZE / 32
+
+        if dir == 1:
+            self.mirrored = True
+        else:
+            self.mirrored = False
 
         collisions = pygame.sprite.spritecollide(self, self.obst_g, False)
         for collision in collisions:
@@ -128,8 +134,23 @@ class player(pygame.sprite.Sprite):
         )
         self.banana_amount -= 1
 
-    def respawn(self):
-        self.rect.topleft = self.spawn
+    def build(self):
+        if self.mirrored:
+            self.obst_g.add(
+                tile(
+                    (self.rect.x + TILE_SIZE + TILE_SIZE) // TILE_SIZE,
+                    self.rect.y // TILE_SIZE,
+                    "bricks",
+                )
+            )
+        else:
+            self.obst_g.add(
+                tile(
+                    (self.rect.x - HALF_TILE - TILE_SIZE) // TILE_SIZE,
+                    self.rect.y // TILE_SIZE,
+                    "bricks",
+                )
+            )
 
     def update(self):
         self.idle_anim.play(self)

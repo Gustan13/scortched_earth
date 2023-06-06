@@ -42,3 +42,5 @@ class Binder(player):
                 self.walk(-1)
                 self.idle_anim.mirrored = False
                 self.walk_anim.mirrored = False
+            elif keys[pygame.K_KP3]:
+                self.build()

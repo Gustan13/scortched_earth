@@ -37,5 +37,5 @@ The game ends once all three of the player's lives is taken.
     - [ ] High jump
     - [ ] Speed boost
     - [ ] Explosive banana
-    - [ ] Block placement
+    - [x] Block placement
     - [ ] +1 banana

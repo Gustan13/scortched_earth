@@ -40,3 +40,5 @@ class Marcelo(player):
                 self.walk(-1)
                 self.idle_anim.mirrored = False
                 self.walk_anim.mirrored = False
+            elif keys[pygame.K_RCTRL]:
+                self.build()
