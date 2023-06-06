@@ -34,8 +34,6 @@ class player(pygame.sprite.Sprite):
         self.angle = pi / 2
         self.power = 50
 
-        self.timer = 0
-        self.timer_set = 20
         self.banana_amount = 5
         self.reload_timer = 60
 
@@ -119,20 +117,16 @@ class player(pygame.sprite.Sprite):
         if self.banana_amount < 1:
             return
 
-        if self.timer <= 0:
-            Banana(
-                self.banana_group,
-                self.obst_g,
-                self.player_group,
-                self.name,
-                self.angle,
-                self.power / 10,
-                self.rect.topleft,
-            )
-            self.timer = self.timer_set
-            self.banana_amount -= 1
-        else:
-            self.timer -= 1
+        Banana(
+            self.banana_group,
+            self.obst_g,
+            self.player_group,
+            self.name,
+            self.angle,
+            self.power / 10,
+            self.rect.topleft,
+        )
+        self.banana_amount -= 1
 
     def respawn(self):
         self.rect.topleft = self.spawn
