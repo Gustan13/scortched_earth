@@ -10,33 +10,28 @@ class Marcelo(player):
     def input(self):
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_n]:
+        if keys[pygame.K_RSHIFT]:
             self.cannon_anim.play(self)
-            if keys[pygame.K_m]:
+            if keys[pygame.K_RCTRL]:
                 self.throw_banana()
-            if keys[pygame.K_s]:
-                self.change_power(-1)
-
-        if keys[pygame.K_w]:
-            if keys[pygame.K_n]:
+            elif keys[pygame.K_w]:
                 self.change_power(1)
-                return
-
-            self.jump()
-
-        if keys[pygame.K_a]:
-            if keys[pygame.K_n]:
-                self.change_angle(-1)
-                return
-
-            self.walk(-1)
-            self.idle_anim.mirrored = False
-            self.walk_anim.mirrored = False
-        elif keys[pygame.K_d]:
-            if keys[pygame.K_n]:
+            elif keys[pygame.K_s]:
+                self.change_power(-1)
+            elif keys[pygame.K_d]:
                 self.change_angle(1)
-                return
+            elif keys[pygame.K_a]:
+                self.change_angle(-1)
 
-            self.walk(1)
-            self.idle_anim.mirrored = True
-            self.walk_anim.mirrored = True
+        else:
+            if keys[pygame.K_w]:
+                self.jump()
+
+            if keys[pygame.K_d]:
+                self.walk(1)
+                self.idle_anim.mirrored = True
+                self.walk_anim.mirrored = True
+            elif keys[pygame.K_a]:
+                self.walk(-1)
+                self.idle_anim.mirrored = False
+                self.walk_anim.mirrored = False

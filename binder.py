@@ -15,29 +15,24 @@ class Binder(player):
             self.cannon_anim.play(self)
             if keys[pygame.K_KP3]:
                 self.throw_banana()
-            if keys[pygame.K_DOWN]:
-                self.change_power(-1)
-
-        if keys[pygame.K_UP]:
-            if keys[pygame.K_KP2]:
+            elif keys[pygame.K_UP]:
                 self.change_power(1)
-                return
-
-            self.jump()
-
-        if keys[pygame.K_LEFT]:
-            if keys[pygame.K_KP2]:
-                self.change_angle(-1)
-                return
-
-            self.walk(-1)
-            self.idle_anim.mirrored = False
-            self.walk_anim.mirrored = False
-        elif keys[pygame.K_RIGHT]:
-            if keys[pygame.K_KP2]:
+            elif keys[pygame.K_DOWN]:
+                self.change_power(-1)
+            elif keys[pygame.K_RIGHT]:
                 self.change_angle(1)
-                return
+            elif keys[pygame.K_LEFT]:
+                self.change_angle(-1)
 
-            self.walk(1)
-            self.idle_anim.mirrored = True
-            self.walk_anim.mirrored = True
+        else:
+            if keys[pygame.K_UP]:
+                self.jump()
+
+            if keys[pygame.K_RIGHT]:
+                self.walk(1)
+                self.idle_anim.mirrored = True
+                self.walk_anim.mirrored = True
+            elif keys[pygame.K_LEFT]:
+                self.walk(-1)
+                self.idle_anim.mirrored = False
+                self.walk_anim.mirrored = False
