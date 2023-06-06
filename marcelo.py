@@ -14,9 +14,7 @@ class Marcelo(player):
             self.cannon_anim.play(self)
             if keys[pygame.K_m]:
                 self.throw_banana()
-            if keys[pygame.K_w]:
-                self.change_power(1)
-            elif keys[pygame.K_s]:
+            if keys[pygame.K_s]:
                 self.change_power(-1)
 
         if keys[pygame.K_a]:
@@ -35,3 +33,10 @@ class Marcelo(player):
             self.walk(1)
             self.idle_anim.mirrored = True
             self.walk_anim.mirrored = True
+
+        if keys[pygame.K_w]:
+            if keys[pygame.K_n]:
+                self.change_power(1)
+                return
+
+            self.jump()

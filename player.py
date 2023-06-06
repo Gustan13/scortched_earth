@@ -37,6 +37,8 @@ class player(pygame.sprite.Sprite):
         self.cos = 0
         self.sin = 0
 
+        self.is_grounded = True
+
     def input(self):
         pass
 
@@ -57,11 +59,14 @@ class player(pygame.sprite.Sprite):
         self.y_speed += 9.8 / FPS
         self.rect.y += self.y_speed
 
+        self.is_grounded = False
+
         collisions = pygame.sprite.spritecollide(self, self.obst_g, False)
 
         for collision in collisions:
             self.rect.bottom = collision.rect.top
             self.y_speed = 0
+            self.is_grounded = True
 
     def change_angle(self, dir):
         if self.angle > pi * 2:
@@ -80,6 +85,10 @@ class player(pygame.sprite.Sprite):
             self.power = 15
         elif self.power < 0:
             self.power = 0
+
+    def jump(self):
+        if self.is_grounded:
+            self.y_speed = -6
 
     def throw_banana(self):
         if self.timer <= 0:
