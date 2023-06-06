@@ -30,3 +30,5 @@ The game ends once all three of the player's lives is taken.
 - [x] Banana break world system
 
 - [ ] Hud
+
+- [ ] Defeat System

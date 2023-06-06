@@ -86,8 +86,8 @@ class player(pygame.sprite.Sprite):
 
         if self.power > 15:
             self.power = 15
-        elif self.power < 0:
-            self.power = 0
+        elif self.power < 1:
+            self.power = 1
 
     def jump(self):
         if self.is_grounded:
