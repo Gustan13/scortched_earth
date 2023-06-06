@@ -73,6 +73,14 @@ class player(pygame.sprite.Sprite):
         self.angle -= dir * 0.05
         # print(self.angle)
 
+    def change_power(self, mag):
+        self.power += mag
+
+        if self.power > 15:
+            self.power = 15
+        elif self.power < 0:
+            self.power = 0
+
     def throw_banana(self):
         if self.timer <= 0:
             Banana(

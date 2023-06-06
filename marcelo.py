@@ -14,6 +14,10 @@ class Marcelo(player):
             self.cannon_anim.play(self)
             if keys[pygame.K_m]:
                 self.throw_banana()
+            if keys[pygame.K_w]:
+                self.change_power(1)
+            elif keys[pygame.K_s]:
+                self.change_power(-1)
 
         if keys[pygame.K_a]:
             if keys[pygame.K_n]:
