@@ -74,9 +74,19 @@ class player(pygame.sprite.Sprite):
         collisions = pygame.sprite.spritecollide(self, self.obst_g, False)
 
         for collision in collisions:
-            self.rect.bottom = collision.rect.top
-            self.y_speed = 0
-            self.is_grounded = True
+            if (
+                self.rect.top < collision.rect.bottom
+                and self.rect.bottom > collision.rect.bottom
+            ):
+                self.rect.top = collision.rect.bottom
+                self.y_speed = 2
+            elif (
+                self.rect.bottom > collision.rect.top
+                and self.rect.top < collision.rect.top
+            ):
+                self.rect.bottom = collision.rect.top
+                self.y_speed = 0
+                self.is_grounded = True
 
     def change_angle(self, dir):
         if self.angle > pi * 2:

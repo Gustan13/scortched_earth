@@ -47,7 +47,7 @@ class Banana(pygame.sprite.Sprite):
         for player in players_collided:
             if player.name != self.thrower:
                 self.kill()
-                player.respawn()
+                player.kill()
 
         if self.rect.y > HEIGHT:
             self.kill()
