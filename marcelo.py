@@ -17,6 +17,13 @@ class Marcelo(player):
             if keys[pygame.K_s]:
                 self.change_power(-1)
 
+        if keys[pygame.K_w]:
+            if keys[pygame.K_n]:
+                self.change_power(1)
+                return
+
+            self.jump()
+
         if keys[pygame.K_a]:
             if keys[pygame.K_n]:
                 self.change_angle(-1)
@@ -33,10 +40,3 @@ class Marcelo(player):
             self.walk(1)
             self.idle_anim.mirrored = True
             self.walk_anim.mirrored = True
-
-        if keys[pygame.K_w]:
-            if keys[pygame.K_n]:
-                self.change_power(1)
-                return
-
-            self.jump()

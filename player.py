@@ -4,7 +4,7 @@ from banana import Banana
 
 from math import pi, sin, cos
 
-from settings import TILE_SIZE, ACCELERATION, FPS
+from settings import TILE_SIZE, WIDTH, HEIGHT, FPS
 
 
 class player(pygame.sprite.Sprite):
@@ -42,6 +42,8 @@ class player(pygame.sprite.Sprite):
 
         self.is_grounded = True
 
+        self.spawn = self.rect.topleft
+
     def input(self):
         pass
 
@@ -55,6 +57,11 @@ class player(pygame.sprite.Sprite):
             else:
                 self.rect.left = collision.rect.right
             return
+
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
 
         self.walk_anim.play(self)
 
@@ -84,8 +91,8 @@ class player(pygame.sprite.Sprite):
     def change_power(self, mag):
         self.power += mag
 
-        if self.power > 15:
-            self.power = 15
+        if self.power > 150:
+            self.power = 150
         elif self.power < 1:
             self.power = 1
 
@@ -101,12 +108,15 @@ class player(pygame.sprite.Sprite):
                 self.player_group,
                 self.name,
                 self.angle,
-                self.power,
+                self.power / 10,
                 self.rect.topleft,
             )
             self.timer = self.timer_set
         else:
             self.timer -= 1
+
+    def respawn(self):
+        self.rect.topleft = self.spawn
 
     def update(self):
         self.idle_anim.play(self)

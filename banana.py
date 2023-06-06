@@ -1,7 +1,7 @@
 from math import sin, cos
 import pygame
 from animation import Animation
-from settings import TILE_SIZE, FPS, HEIGHT
+from settings import TILE_SIZE, HALF_TILE, FPS, HEIGHT
 
 
 class Banana(pygame.sprite.Sprite):
@@ -19,10 +19,10 @@ class Banana(pygame.sprite.Sprite):
 
         self.thrower = thrower
 
-        self.banana_spin = Animation("banana", 4, 10, TILE_SIZE)
+        self.banana_spin = Animation("banana", 4, 10, HALF_TILE)
 
         self.image = pygame.image.load("sprites/frames_banana/banana_0.gif")
-        self.image = pygame.transform.scale(self.image, (TILE_SIZE, TILE_SIZE))
+        self.image = pygame.transform.scale(self.image, (HALF_TILE, HALF_TILE))
 
         self.rect = self.image.get_rect()
         self.rect.topleft = position
@@ -39,8 +39,6 @@ class Banana(pygame.sprite.Sprite):
         self.angles = pygame.math.Vector2(cos(angle) * power, -sin(angle) * power)
         self.angles.normalize()
 
-        print(self.initial_xs, self.initial_ys)
-
     def collision(self):
         if pygame.sprite.spritecollide(self, self.obstacle_group, True):
             self.kill()
@@ -49,7 +47,7 @@ class Banana(pygame.sprite.Sprite):
         for player in players_collided:
             if player.name != self.thrower:
                 self.kill()
-                player.kill()
+                player.respawn()
 
         if self.rect.y > HEIGHT:
             self.kill()
