@@ -8,8 +8,10 @@ from settings import TILE_SIZE, ACCELERATION, FPS
 
 
 class player(pygame.sprite.Sprite):
-    def __init__(self, name, x, y, obst_g, banana_group):
-        super().__init__()
+    def __init__(self, name, x, y, obst_g, banana_group, player_group):
+        super().__init__([player_group])
+
+        self.name = name
 
         self.idle_anim = Animation(name, 1, 1, TILE_SIZE)
         self.walk_anim = Animation(name, 4, 10, TILE_SIZE)
@@ -23,6 +25,7 @@ class player(pygame.sprite.Sprite):
 
         self.obst_g = obst_g
         self.banana_group = banana_group
+        self.player_group = player_group
 
         self.y_speed = 0
 
@@ -95,6 +98,8 @@ class player(pygame.sprite.Sprite):
             Banana(
                 self.banana_group,
                 self.obst_g,
+                self.player_group,
+                self.name,
                 self.angle,
                 self.power,
                 self.rect.topleft,

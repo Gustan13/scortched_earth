@@ -4,8 +4,8 @@ from player import player
 
 
 class Marcelo(player):
-    def __init__(self, x, y, obst_g, banana_group):
-        super().__init__("marcelo", x, y, obst_g, banana_group)
+    def __init__(self, x, y, obst_g, banana_group, player_group):
+        super().__init__("marcelo", x, y, obst_g, banana_group, player_group)
 
     def input(self):
         keys = pygame.key.get_pressed()

@@ -18,10 +18,14 @@ class map_maker:
                 elif num == 2:
                     self.obstacle_group.add(tile(j, i, "floor"))
                 elif num == 3:
-                    self.player_group.add(
-                        Marcelo(j, i, self.obstacle_group, self.banana_group)
+                    Marcelo(
+                        j, i, self.obstacle_group, self.banana_group, self.player_group
                     )
                 elif num == 4:
-                    self.player_group.add(
-                        Binder(j, i, self.obstacle_group, self.banana_group)
+                    Binder(
+                        j,
+                        i,
+                        self.obstacle_group,
+                        self.banana_group,
+                        self.player_group,
                     )

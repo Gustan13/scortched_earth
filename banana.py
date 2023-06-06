@@ -5,8 +5,19 @@ from settings import TILE_SIZE, FPS, HEIGHT
 
 
 class Banana(pygame.sprite.Sprite):
-    def __init__(self, banana_group, obstacle_group, angle, power, position) -> None:
+    def __init__(
+        self,
+        banana_group,
+        obstacle_group,
+        player_group,
+        thrower,
+        angle,
+        power,
+        position,
+    ) -> None:
         super().__init__(banana_group)
+
+        self.thrower = thrower
 
         self.banana_spin = Animation("banana", 4, 10, TILE_SIZE)
 
@@ -18,6 +29,7 @@ class Banana(pygame.sprite.Sprite):
 
         self.banana_group = banana_group
         self.obstacle_group = obstacle_group
+        self.player_group = player_group
 
         self.y_speed = 0
 
@@ -32,6 +44,12 @@ class Banana(pygame.sprite.Sprite):
     def collision(self):
         if pygame.sprite.spritecollide(self, self.obstacle_group, True):
             self.kill()
+
+        players_collided = pygame.sprite.spritecollide(self, self.player_group, False)
+        for player in players_collided:
+            if player.name != self.thrower:
+                self.kill()
+                player.kill()
 
         if self.rect.y > HEIGHT:
             self.kill()
