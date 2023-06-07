@@ -1,7 +1,7 @@
 import pygame
 from animation import Animation
 from banana import Banana
-from tile import tile
+from tile import brick
 
 from math import pi, sin, cos
 
@@ -45,6 +45,8 @@ class player(pygame.sprite.Sprite):
 
         self.spawn = self.rect.topleft
 
+        self.spawned_brick = False
+
     def input(self):
         pass
 
@@ -58,6 +60,10 @@ class player(pygame.sprite.Sprite):
 
         collisions = pygame.sprite.spritecollide(self, self.obst_g, False)
         for collision in collisions:
+            if collision.spawner == self.name:
+                if not collision.player_left:
+                    continue
+
             if dir == 1:
                 self.rect.right = collision.rect.left
             else:
@@ -80,6 +86,10 @@ class player(pygame.sprite.Sprite):
         collisions = pygame.sprite.spritecollide(self, self.obst_g, False)
 
         for collision in collisions:
+            if collision.spawner == self.name:
+                if not collision.player_left:
+                    continue
+
             if (
                 self.rect.top < collision.rect.bottom
                 and self.rect.bottom > collision.rect.bottom
@@ -137,18 +147,20 @@ class player(pygame.sprite.Sprite):
     def build(self):
         if self.mirrored:
             self.obst_g.add(
-                tile(
-                    (self.rect.x + TILE_SIZE + TILE_SIZE) // TILE_SIZE,
+                brick(
+                    (self.rect.x + TILE_SIZE + HALF_TILE) // TILE_SIZE,
                     self.rect.y // TILE_SIZE,
-                    "bricks",
+                    self.name,
+                    self.player_group,
                 )
             )
         else:
             self.obst_g.add(
-                tile(
-                    (self.rect.x - HALF_TILE - TILE_SIZE) // TILE_SIZE,
+                brick(
+                    (self.rect.x + HALF_TILE - TILE_SIZE) // TILE_SIZE,
                     self.rect.y // TILE_SIZE,
-                    "bricks",
+                    self.name,
+                    self.player_group,
                 )
             )
 
